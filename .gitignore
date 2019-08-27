@@ -16,3 +16,4 @@ modules/database
 modules/global
 modules/security
 modules/services
+modules/resources
