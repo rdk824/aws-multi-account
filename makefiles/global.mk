@@ -13,11 +13,11 @@ tf_global_remote_state:
 	# Generate tf remote state
 	$(SCRIPTS)/tf-remote-state.sh global > $(ROOT_DIR)terraform.tf
 
-refresh_global: | $(TF_PROVIDER)
+refresh_global: init_global
 	cd $(ROOT_DIR); \
 	$(TF_REFRESH) -target module.global
 
-destroy_global: | $(TF_PROVIDER)
+destroy_global: init_global
 	cd $(ROOT_DIR); \
 	$(TF_DESTROY) -target module.global
 

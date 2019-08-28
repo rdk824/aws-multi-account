@@ -13,11 +13,11 @@ tf_organization_remote_state:
 	# Generate tf rmote state
 	$(SCRIPTS)/tf-remote-state.sh organization > $(ROOT_DIR)terraform.tf
 
-refresh_organization: | $(TF_PROVIDER)
+refresh_organization: init_organization
 	cd $(ROOT_DIR); \
 	$(TF_REFRESH) -target module.organization
 
-destroy_organization: | $(TF_PROVIDER)
+destroy_organization: init_organization
 	cd $(ROOT_DIR); \
 	$(TF_DESTROY) -target module.organization
 

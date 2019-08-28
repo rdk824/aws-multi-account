@@ -13,11 +13,11 @@ tf_services_remote_state:
 	# Generate tf remote state
 	$(SCRIPTS)/tf-remote-state.sh services > $(ROOT_DIR)terraform.tf
 
-refresh_services: | $(TF_PROVIDER)
+refresh_services: init_services
 	cd $(ROOT_DIR); \
 	$(TF_REFRESH) -target module.services
 
-destroy_services: | $(TF_PROVIDER)
+destroy_services: init_services
 	cd $(ROOT_DIR); \
 	$(TF_DESTROY) -target module.services
 

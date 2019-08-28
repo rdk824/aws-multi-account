@@ -13,11 +13,11 @@ tf_database_remote_state:
 	# Generate tf remote state
 	$(SCRIPTS)/tf-remote-state.sh database > $(ROOT_DIR)terraform.tf
 
-refresh_database: | $(TF_PROVIDER)
+refresh_database: init_database
 	cd $(ROOT_DIR); \
 	$(TF_REFRESH) -target module.database
 
-destroy_database: | $(TF_PROVIDER)
+destroy_database: init_database
 	cd $(ROOT_DIR); \
 	$(TF_DESTROY) -target module.database
 

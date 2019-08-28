@@ -13,11 +13,11 @@ tf_security_remote_state:
 	# Generate tf remote state
 	$(SCRIPTS)/tf-remote-state.sh security > $(ROOT_DIR)terraform.tf
 
-refresh_security: | $(TF_PROVIDER)
+refresh_security: init_security
 	cd $(ROOT_DIR); \
 	$(TF_REFRESH) -target module.security
 
-destroy_security: | $(TF_PROVIDER)
+destroy_security: init_security
 	cd $(ROOT_DIR); \
 	$(TF_DESTROY) -target module.security
 

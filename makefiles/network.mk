@@ -13,11 +13,11 @@ tf_network_remote_state:
 	# Generate tf rmote state
 	$(SCRIPTS)/tf-remote-state.sh network > $(ROOT_DIR)terraform.tf
 
-refresh_network: | $(TF_PROVIDER)
+refresh_network: init_network
 	cd $(ROOT_DIR); \
 	$(TF_REFRESH) -target module.network
 
-destroy_network: | $(TF_PROVIDER)
+destroy_network: init_network
 	cd $(ROOT_DIR); \
 	$(TF_DESTROY) -target module.network
 
