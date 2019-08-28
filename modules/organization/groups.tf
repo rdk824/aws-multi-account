@@ -108,7 +108,6 @@ data "aws_iam_policy_document" "admin" {
 ### Developer Policy
 #--------------------------------------------
 data "aws_iam_policy_document" "dev" {
-  source_json = file("${path.module}/iam-policy-files/power_user_policy.json")
   statement {
     actions   = ["sts:AssumeRole"]
 
