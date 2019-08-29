@@ -8,6 +8,16 @@ data "aws_caller_identity" "current" {}
 #========================================================
 ### Getting the current running account id
 #========================================================
+
+
+#-- Production KMS Key
+module "security" {
+  source                     = "../../modules/security"
+  create_kms_key             = true
+  kms_key_alias              = "prod-kms-key"
+}
+
+#-- Network Configuration
 module "network" {
   source                            = "../../modules/network"
 
