@@ -12,7 +12,7 @@ module "network" {
   source                            = "../../modules/network"
 
   stage                             = "dev"
-  availability_zones                = ["${var.aws_default_region}a", "${var.aws_default_region}b", "${var.aws_default_region}c"]
+  availability_zones                = ["${var.aws_default_region}a"]
   #-- VPC
   cidr_block                        = "10.32.0.0/16"
   #-- Public subnet
