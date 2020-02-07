@@ -14,14 +14,14 @@ DB_TABLE=terraform-remote-state-locking
 if [ $ACCOUNT_NAME = "root" ]; then
   # Create remote state S3 bucket
   if aws s3 ls --profile $ROOT_AWS_PROFILE | grep $BUCKET_NAME > /dev/null 2>&1; then
-    echo "Remote state bucket $BUCKET_NAME alrwady exists. Skipping..." > /dev/null 2>&1
+    echo "Remote state bucket $BUCKET_NAME already exists. Skipping..." > /dev/null 2>&1
   else
     aws s3api create-bucket --bucket $BUCKET_NAME --profile $ROOT_AWS_PROFILE
   fi
 
   # Create remote kms key
   if aws kms list-aliases --output text --profile $ROOT_AWS_PROFILE | grep $KMS_KEY_ALIAS > /dev/null 2>&1; then
-    echo "KMS key $KMS_KEY_ALIAS alrwady exists. Skipping..." > /dev/null 2>&1
+    echo "KMS key $KMS_KEY_ALIAS already exists. Skipping..." > /dev/null 2>&1
     AWS_KMS_KEY_ID=$(aws --profile $ROOT_AWS_PROFILE kms describe-key --key-id $KMS_KEY_ALIAS | jq --raw-output '.KeyMetadata.KeyId')
   else
     AWS_KMS_KEY_ID=$(aws kms create-key \
@@ -35,7 +35,7 @@ if [ $ACCOUNT_NAME = "root" ]; then
 
   # Create remote state dynamodb table
   if aws dynamodb list-tables --profile $ROOT_AWS_PROFILE --output text | grep $DB_TABLE > /dev/null 2>&1; then
-    echo "Remote state dynamodb table $DB_TABLE alrwady exists. Skipping..." > /dev/null 2>&1
+    echo "Remote state dynamodb table $DB_TABLE already exists. Skipping..." > /dev/null 2>&1
   else
     aws dynamodb create-table \
         --table-name $DB_TABLE \
